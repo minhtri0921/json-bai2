@@ -1,3 +1,21 @@
+let titleElement = $('input[name="title"]')
+let descriptionlement = $('textarea[name="description"]')
+let detailElement = $('textarea[name="detail"]')
+function handleBlurInput(input) {
+    var errorElement = input.siblings(".form-message");
+    console.log(errorElement);
+    input.blur(function () {
+        if (input.val() === '') {
+            $(errorElement).attr('style', 'color: red; font-style: italic;');
+            $(errorElement).text("Vui lòng nhập");
+        } else {
+            $(errorElement).text('');
+        }
+    })
+}
+handleBlurInput(titleElement)
+handleBlurInput(descriptionlement)
+handleBlurInput(detailElement)
 let listBooks = []
 
 function findGetParameter(parameterName) {
@@ -28,15 +46,12 @@ async function getData() {
         let detail = $('textarea[name="detail"]').val()
         let status = $('select[name="status"]').val()
 
-        let formData = [
-            {
-                title: newTitle,
-                description: description,
-                detail: detail,
-                status: status
-            }
-        ]
-        console.log(formData);
+        let formData = {
+            title: newTitle,
+            description: description,
+            detail: detail,
+            status: status
+        }
 
         await axios({
             method: "PUT",
@@ -44,6 +59,7 @@ async function getData() {
             data: JSON.stringify(formData),
             headers: { "Content-Type": "application/json" },
         })
+        location = 'list.html'
     })
 }
 getData()

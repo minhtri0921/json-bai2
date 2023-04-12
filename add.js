@@ -1,3 +1,21 @@
+let titleElement = $('input[name="title"]')
+let descriptionlement = $('textarea[name="description"]')
+let detailElement = $('textarea[name="detail"]')
+function handleBlurInput(input) {
+    var errorElement = input.siblings(".form-message");
+    console.log(errorElement);
+    input.blur(function () {
+        if (input.val() === '') {
+            $(errorElement).attr('style', 'color: red; font-style: italic;');
+            $(errorElement).text("Vui lòng nhập");
+        } else {
+            $(errorElement).text('');
+        }
+    })
+}
+handleBlurInput(titleElement)
+handleBlurInput(descriptionlement)
+handleBlurInput(detailElement)
 
 $("button#add").click(async function (e) {
     e.preventDefault();
@@ -21,6 +39,7 @@ $("button#add").click(async function (e) {
     location = 'list.html'
 
 })
+
 $("button a").click(function () {
     location = 'list.html'
 })

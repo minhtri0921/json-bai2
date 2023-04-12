@@ -10,7 +10,7 @@ async function getData() {
 </tr>`
     let listBook = await axios('http://localhost:3004/books')
     listBook = listBook.data
-
+    console.log(listBook);
     function renderBooks(book) {
         return `<tr>
         <td>${book.id}</td>
@@ -18,7 +18,7 @@ async function getData() {
         <td>${book.description}</td>
         <td>${book.detail}</td>
         <td>${book.status}</td>
-        <td><a href="edit.html?id=${book.id}" ">Sửa</a> <a href="" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" >Xóa</a></td>
+        <td><a href="edit.html?id=${book.id}" ">Sửa</a> <a href="" onclick="remove(${book.id})" >Xóa</a></td>
         </tr>`
     }
     let str = ''
@@ -33,8 +33,19 @@ async function getData() {
 
 }
 getData()
-$("a#editLink").click(function () {
-    location = 'edit.html'
-})
+async function remove(id) {
+    console.log(id);
+    let yon = window.confirm("Bạn có muốn xóa sách này ? ")
+
+    if (yon === true) {
+        await axios({
+            method: "DELETE",
+            url: 'http://localhost:3004/books' + "/" + id,
+
+            headers: { "Content-Type": "application/json" },
+        })
+    }
+    getData()
+}
 
 
