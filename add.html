@@ -1,55 +1,62 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Thêm sách</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sách</title>
 </head>
 
 <body>
-	<div>
-		<h2>
-			<span>Thêm thông tin sách</span>
-		</h2>
+    <div>
+        <h2>
+            <span>Thêm thông tin sách</span>
+        </h2>
 
-		<div>
+        <div>
 
-			<form action="" method="post">
+            <form action="" method="post">
 
-				<div>
-					<input type="hidden" name="id" value="" />
+                <div>
+                    <input type="hidden" name="id" value="" />
 
-				</div>
+                </div>
 
-				<div>
-					<label>title</label><br />
-					<input type="text" name="title" value="" />
-				</div>
+                <div>
+                    <label>title</label><br />
+                    <input type="text" name="title" value="" />
+                    <span class="form-message"></span>
+                </div>
 
-				<div>
-					<label>description</label><br />
-					<textarea rows="3" cols="25" name="description"></textarea>
-				</div>
+                <div>
+                    <label>description</label><br />
+                    <textarea rows="3" cols="25" name="description"></textarea>
+                    <span class="form-message"></span>
+                </div>
 
-				<div>
-					<label>detail</label><br />
-					<textarea rows="3" cols="25" name="detail"></textarea>
-				</div>
+                <div>
+                    <label>detail</label><br />
+                    <textarea rows="3" cols="25" name="detail"></textarea>
+                    <span class="form-message"></span>
+                </div>
 
-				<div>
-					<label>status</label><br />
-					<select name="status">
-						<option value="true">Enabled</option>
-						<option value="false">Disabled </option>
-					</select>
-				</div>
-				<input type="submit" value="Thêm sách" />
-			</form>
-			<button><a href="list.html">Danh sách</a></button>
-		</div>
-	</div>
-
+                <div>
+                    <label>status</label><br />
+                    <select name="status">
+                        <option value="true">Enabled</option>
+                        <option value="false">Disabled </option>
+                    </select>
+                </div>
+                <button id="add">Thêm sách</button>
+            </form>
+            <button><a href="list.html">Danh sách</a></button>
+        </div>
+    </div>
 
 </body>
+<script src="lib/axios.min.js"></script>
+<script src="lib/jquery-3.6.3.min.js"></script>
+<script src="add.js"></script>
 
 </html>
