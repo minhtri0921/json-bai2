@@ -31,13 +31,18 @@ function findGetParameter(parameterName) {
 
 let id = findGetParameter('id');
 async function getData() {
-    let bookEdit = await axios(`http://localhost:3004/books/${id}`)
-    bookEdit = bookEdit.data;
-    console.log(bookEdit);
-    $('input[type="text"]').val(bookEdit.title)
-    $('textarea[name="description"]').val(bookEdit.description)
-    $('textarea[name="detail"]').val(bookEdit.detail)
-    $('select[name="status"]').val(bookEdit.status)
+    try {
+        let bookEdit = await axios(`http://localhost:3004/books/${id}`)
+        bookEdit = bookEdit.data;
+        console.log(bookEdit);
+        $('input[type="text"]').val(bookEdit.title)
+        $('textarea[name="description"]').val(bookEdit.description)
+        $('textarea[name="detail"]').val(bookEdit.detail)
+        $('select[name="status"]').val(bookEdit.status)
+    } catch (error) {
+        $("p#error").html(`<p>Xảy ra lỗi : ${error}</p>`)
+        $("p#error").attr('style', 'color : red')
+    }
 
     $('button#edit').click(async function (e) {
         e.preventDefault()
@@ -53,14 +58,20 @@ async function getData() {
             status: status
         }
 
-        await axios({
-            method: "PUT",
-            url: 'http://localhost:3004/books/' + id,
-            data: JSON.stringify(formData),
-            headers: { "Content-Type": "application/json" },
-        })
-        location = 'list.html'
+        try {
+            await axios({
+                method: "PUT",
+                url: 'http://localhost:3004/books/' + id,
+                data: JSON.stringify(formData),
+                headers: { "Content-Type": "application/json" },
+            })
+            location = 'list.html?msg=2'
+        } catch (error) {
+            $("p#error2").html(`<p>Xảy ra lỗi : ${error}</p>`)
+            $("p#error2").attr('style', 'color : red')
+        }
     })
+
 }
 getData()
 

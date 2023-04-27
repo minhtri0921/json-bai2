@@ -30,36 +30,21 @@ $("button#add").click(async function (e) {
         detail: detail,
         status: status
     }
-    await axios({
-        method: "POST",
-        url: 'http://localhost:3004/books',
-        data: JSON.stringify(formData),
-        headers: { "Content-Type": "application/json" },
-    })
-    location = 'list.html'
+    try {
+        await axios({
+            method: "POST",
+            url: 'http://localhost:3004/books',
+            data: JSON.stringify(formData),
+            headers: { "Content-Type": "application/json" },
+        })
+        location = 'list.html?msg=1'
+    } catch (error) {
+        $("p#error").html(`<p>Xảy ra lỗi : ${error}</p>`)
+        $("p#error").attr('style', 'color : red')
+    }
 
 })
 
 $("button a").click(function () {
     location = 'list.html'
 })
-
-
-
-// let nameElement = $("input#title")
-// let descriptionElement = $("input#description")
-// let detailElement = $("input#detail")
-// function handleBlurInput(input) {
-//     var errorElement = $(".form-message")
-//     input.blur(function () {
-//         if (input.val() === '') {
-//             let errorMesagge = "Vui lòng nhập"
-//             $(errorElement).attr('style', 'color: red; font-style: italic;');
-//             $(errorElement).text(errorMesagge);
-//         } else {
-//             $(errorElement).text('');
-//         }
-//     })
-// }
-// handleBlurInput(nameElement)
-// handleBlurInput(typeElement)
